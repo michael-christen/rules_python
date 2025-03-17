@@ -18,6 +18,8 @@ compile_pip_requirements(
     requirements_windows = "requirements_windows.txt",
 )
 
+# gazelle:python_generation_mode file
+
 # This repository rule fetches the metadata for python packages we
 # depend on. That data is required for the gazelle_python_manifest
 # rule to update our manifest file.
@@ -57,47 +59,21 @@ gazelle(
     gazelle = "@rules_python_gazelle_plugin//python:gazelle_binary",
 )
 
-# This rule is auto-generated and managed by Gazelle,
-# because it found the __init__.py file in this folder.
-# See: https://bazel.build/reference/be/python#py_library
 py_library(
-    name = "build_file_generation",
+    name = "__init__",
     srcs = ["__init__.py"],
     visibility = ["//:__subpackages__"],
     deps = [
-        "//random_number_generator",
+        "//random_number_generator:generate_random_number",
         "@pip//flask",
         "@pip//sphinx",
     ],
 )
 
-# A py_binary is an executable Python program consisting of a collection of .py source files.
-# See: https://bazel.build/reference/be/python#py_binary
-#
-# This rule is auto-generated and managed by Gazelle,
-# because it found the __main__.py file in this folder.
-# This rule creates a target named //:build_file_generation_bin and you can use
-# bazel to run the target:
-# `bazel run //:build_file_generation_bin`
 py_binary(
     name = "build_file_generation_bin",
     srcs = ["__main__.py"],
     main = "__main__.py",
     visibility = ["//:__subpackages__"],
-    deps = [":build_file_generation"],
-)
-
-# A py_test is a Python unit test.
-# See: https://bazel.build/reference/be/python#py_test
-#
-# This rule is auto-generated and managed by Gazelle,
-# because it found the __test__.py file in this folder.
-# This rule creates a target named //:build_file_generation_test and you can use
-# bazel to run the target:
-# `bazel test //:build_file_generation_test`
-py_test(
-    name = "build_file_generation_test",
-    srcs = ["__test__.py"],
-    main = "__test__.py",
-    deps = [":build_file_generation"],
+    deps = [":__init__"],
 )
