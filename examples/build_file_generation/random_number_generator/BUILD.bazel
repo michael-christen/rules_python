@@ -1,3 +1,4 @@
+load("@rules_python//python:defs.bzl", "py_binary")
 load("@rules_python//python:py_library.bzl", "py_library")
 load("@rules_python//python:py_test.bzl", "py_test")
 
@@ -10,5 +11,11 @@ py_library(
 py_library(
     name = "generate_random_number",
     srcs = ["generate_random_number.py"],
+    visibility = ["//:__subpackages__"],
+)
+
+py_binary(
+    name = "example_bin",
+    srcs = ["example_bin.py"],
     visibility = ["//:__subpackages__"],
 )
