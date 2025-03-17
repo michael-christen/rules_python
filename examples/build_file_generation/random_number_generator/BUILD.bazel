@@ -19,3 +19,9 @@ py_binary(
     srcs = ["example_bin.py"],
     visibility = ["//:__subpackages__"],
 )
+
+py_binary(
+    name = "other_bin",
+    srcs = ["other_bin.py"],
+    visibility = ["//:__subpackages__"],
+)
